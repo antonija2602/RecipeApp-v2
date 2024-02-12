@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+        <title>Recipes App v2</title>
+
+        <!--=============== CSS ===============-->
+        <link
+            rel="stylesheet"
+            href="assets/css/style.css" />
+
+        <!--=============== BOOTSTRAP CSS ===============-->
+        <link
+            rel="stylesheet"
+            href="assets/bootstrap/bootstrap.css" />
+
+        <!--=============== SCRIPT JS ===============-->
+        <script
+            src="assets/js/script.js"
+            defer></script>
+    </head>
+    <body>
+        <!--==================== SEARCH ====================-->
+        <section class="p-5">
+            <div
+                class="row justify-content-center"
+                id="search">
+                <div class="col-4">
+                    <input
+                        id="search-input"
+                        type="text"
+                        class="form-control"
+                        placeholder="Type here for search" />
+                </div>
+                <div class="col-auto">
+                    <button
+                        id="search-button"
+                        onclick="searchMeals()"
+                        class="btn btn-primary">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== FAVORITE ====================-->
+        <section>
+            <div class="container-md bg-danger-subtle rounded px-4 py-3">
+                <h5>Favorite Meals</h5>
+                <div
+                    class="overflow-auto pt-2 pb-3 d-flex gap-1"
+                    id="favorite-container"></div>
+            </div>
+        </section>
+
+        <!--==================== MEALS ====================-->
+        <section>
+            <div
+                class="container-md rounded shadow-sm p-5 my-2 justify-content-center"
+                id="meals">
+                <div
+                    class="row gap-3"
+                    id="meals-content"></div>
+            </div>
+        </section>
+
+        <!--==================== RECIPE ====================-->
+        <section>
+            <div
+                class="recipe__container container grid border"
+                id="recipe-container">
+                <div
+                    class="recipe__content"
+                    id="recipe-content"></div>
+            </div>
+        </section>
+    </body>
+</html>
