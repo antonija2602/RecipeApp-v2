@@ -2,6 +2,9 @@
 const searchInputEl = document.getElementById("search-input")
 const mealsContentContainer = document.getElementById("meals-content")
 
+// APP Initialization
+randomMeals()
+
 // || --------------------------------------------- ||
 // || ----------------- SEARCH -------------------- ||
 // || --------------------------------------------- ||
@@ -20,14 +23,11 @@ async function getMealsJson(term) {
 async function searchMeals() {
     //clean container
     mealsContentContainer.innerHTML = ""
-    console.clear() // <-------------@@@@@@@@@@@@@
 
-    // const searchValue = searchInputEl.value
-    const searchValue = "tomato" // <-------------@@@@@@@@@@@@@
+    const searchValue = searchInputEl.value
     const meals = await getMealsJson(searchValue) //searchValue goes to term in getMealsJson(term)
     if (meals) {
         meals.forEach((meal) => {
-            // console.log(meal) // <-------------@@@@@@@@@@@@@
             createMealCard(meal)
         })
     }
@@ -55,23 +55,64 @@ function createMealCard(mealData) {
         </div>
         
                 <!-- Meal Actions -->
-        <div class="card-body d-flex align-items-end justify-content-between py-1 px-0">
+        <div class="card-body d-flex align-items-end justify-content-between align-items-center py-1 px-0">
                 <!-- Recipe Button -->
-            <button 
-            onclick="showRecipe()"
-            type="button" class="modal_button btn btn-success">Recipe</button>
-                <!-- Toggle Favorites Button -->
-            <button 
-           
-            class="toggle__favorites_btn btn">
+            <button             
+            type="button" class="recipe__button btn btn-success">Recipe</button>
+                
+            <!-- Toggle Favorites Button -->
+            <button   
+                
+              
+            class="toggle__favorites_btn btn fs-3  ">
                 <i class="fas fa-heart"></i>
             </button>
         </div>`
+
+    const recipeButton = mealCard.querySelector(".recipe__button")
+    recipeButton.addEventListener("click", () => {
+        console.log("recipe__button")
+    })
+
+    // // Add event listener for Toggle Favorites Button
+    const toggleFavoritesButton = mealCard.querySelector(".toggle__favorites_btn i")
+    toggleFavoritesButton.addEventListener("click", () => {
+        const isActivated = toggleFavoritesButton.classList.contains("activated")
+
+        if (isActivated) {
+            // removeMealLocalStorage(mealData.idMeal)
+            toggleFavoritesButton.classList.remove("activated")
+        } else {
+            // addMealLocalStorage(mealData.idMeal)
+            toggleFavoritesButton.classList.add("activated")
+        }
+
+        // fetchFavMeals()
+    })
 
     // Append meal to meals content
     mealsContentContainer.appendChild(mealCard)
 }
 
 // || --------------------------------------------- ||
-// || --------------- FILL RECIPE ----------------- ||
+// || --------------- RANDOM MEAL ----------------- ||
 // || --------------------------------------------- ||
+async function getRandomMealJson() {
+    try {
+        const response = await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+        const responseData = await response.json()
+        const randomMeal = responseData.meals[0]
+        return randomMeal
+    } catch (error) {
+        console.error("Error fetching random meal:", error)
+    }
+}
+
+async function randomMeals() {
+    //clean container
+    mealsContentContainer.innerHTML = ""
+
+    const meal = await getRandomMealJson() //searchValue goes to term in getMealsJson(term)
+
+    createMealCard(meal)
+}

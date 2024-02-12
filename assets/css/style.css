@@ -14,3 +14,7 @@
     min-height: 10rem !important;
     overflow: hidden !important;
 }
+
+.activated {
+    color: rgb(128, 0, 255) !important;
+}
