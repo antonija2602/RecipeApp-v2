@@ -78,12 +78,16 @@
         <!--==================== RECIPE ====================-->
         <section>
             <div
-                class="recipe__container container shadow-sm rounded pb-4"
+                class="recipe__container container shadow-sm rounded pb-4 hidden"
                 id="recipe-container">
                 <div class="row justify-content-end border-bottom">
                     <div class="col-4"><h1 class="text-center pt-3 pb-2">Recipe</h1></div>
                     <div class="col-4 text-end">
-                        <button class="btn fs-2"><i class="fa-solid fa-xmark"></i></button>
+                        <button
+                            onclick="hideRecipe()"
+                            class="btn fs-1">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="container py-5">
@@ -118,41 +122,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <h1 class="text-center py-3 border-bottom border-top">Ingredients</h1>
-                    <div>
-                        <ul class="px-5 py-3 list-group">
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                        </ul>
+                <div class="container">
+                    <div class="row"><h1 class="text-center py-3 border-bottom border-top">Ingredients</h1></div>
+                    <div class="row px-5">
+                        <div class="col px-5">
+                            <ul class="px-5 list-group py-4 border-bottom">
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-between p-4">
+                <div class="d-flex justify-content-between p-4 border-bottom">
                     <a href="#">Original recipe</a>
                     <button class="btn btn-danger"><i class="fa-brands fa-youtube"> You Tube</i></button>
                 </div>
-                <div class="container text-end px-4"><button class="btn btn-primary">Close</button></div>
+                <div class="container text-end px-4 py-3">
+                    <button
+                        onclick="hideRecipe()"
+                        class="btn btn-primary fs-4">
+                        Close
+                    </button>
+                </div>
             </div>
         </section>
     </body>
