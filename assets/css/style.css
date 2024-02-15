@@ -15,6 +15,10 @@
     overflow: hidden !important;
 }
 
-.activated {
+.addedToFavorites {
     color: rgb(128, 0, 255) !important;
+}
+
+.hidden {
+    display: none;
 }
