@@ -1,6 +1,7 @@
 // DOM Elements
 const searchInputEl = document.getElementById("search-input")
 const mealsContentContainer = document.getElementById("meals-content")
+const recipeContainer = document.getElementById("recipe-container")
 
 // APP Initialization
 randomMeals()
@@ -23,6 +24,7 @@ async function getMealsJson(term) {
 async function searchMeals() {
     //clean container
     mealsContentContainer.innerHTML = ""
+    hideRecipe()
 
     const searchValue = searchInputEl.value
     const meals = await getMealsJson(searchValue) //searchValue goes to term in getMealsJson(term)
@@ -69,28 +71,29 @@ function createMealCard(mealData) {
             </button>
         </div>`
 
+    // Add event listener for Recipe Button
     const recipeButton = mealCard.querySelector(".recipe__button")
     recipeButton.addEventListener("click", () => {
-        console.log("recipe__button")
+        toggleRecipe()
     })
 
-    // // Add event listener for Toggle Favorites Button
+    // Add event listener for Toggle Favorites Button
     const toggleFavoritesButton = mealCard.querySelector(".toggle__favorites_btn i")
     toggleFavoritesButton.addEventListener("click", () => {
-        const isActivated = toggleFavoritesButton.classList.contains("activated")
+        const isActivated = toggleFavoritesButton.classList.contains("addedToFavorites")
 
         if (isActivated) {
             // removeMealLocalStorage(mealData.idMeal)
-            toggleFavoritesButton.classList.remove("activated")
+            toggleFavoritesButton.classList.remove("addedToFavorites")
         } else {
             // addMealLocalStorage(mealData.idMeal)
-            toggleFavoritesButton.classList.add("activated")
+            toggleFavoritesButton.classList.add("addedToFavorites")
         }
 
         // fetchFavMeals()
     })
 
-    // Append meal to meals content
+    // Append mealcard with meal to meals content container
     mealsContentContainer.appendChild(mealCard)
 }
 
@@ -115,4 +118,12 @@ async function randomMeals() {
     const meal = await getRandomMealJson() //searchValue goes to term in getMealsJson(term)
 
     createMealCard(meal)
+}
+
+function toggleRecipe() {
+    recipeContainer.classList.toggle("hidden")
+}
+
+function hideRecipe() {
+    recipeContainer.classList.add("hidden")
 }
