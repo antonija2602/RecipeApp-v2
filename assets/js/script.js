@@ -6,9 +6,9 @@ const recipeContainer = document.getElementById("recipe-container")
 // APP Initialization
 randomMeals()
 
-// || --------------------------------------------- ||
-// || ----------------- SEARCH -------------------- ||
-// || --------------------------------------------- ||
+// || -------------------------------------------- ||
+// || ------------------ SEARCH ------------------ ||
+// || -------------------------------------------- ||
 // getting data from api by term
 async function getMealsJson(term) {
     try {
@@ -74,7 +74,7 @@ function createMealCard(mealData) {
     // Add event listener for Recipe Button
     const recipeButton = mealCard.querySelector(".recipe__button")
     recipeButton.addEventListener("click", () => {
-        toggleRecipe()
+        showRecipe()
     })
 
     // Add event listener for Toggle Favorites Button
@@ -98,7 +98,7 @@ function createMealCard(mealData) {
 }
 
 // || --------------------------------------------- ||
-// || --------------- RANDOM MEAL ----------------- ||
+// || ---------------- RANDOM MEAL ---------------- ||
 // || --------------------------------------------- ||
 async function getRandomMealJson() {
     try {
@@ -115,15 +115,69 @@ async function randomMeals() {
     //clean container
     mealsContentContainer.innerHTML = ""
 
-    const meal = await getRandomMealJson() //searchValue goes to term in getMealsJson(term)
+    const meal = await getRandomMealJson()
 
     createMealCard(meal)
+    updateRecipeContainer(meal)
+    showRecipe()
 }
 
-function toggleRecipe() {
-    recipeContainer.classList.toggle("hidden")
-}
+// || ---------------------------------------------- ||
+// || ------------------- RECIPE ------------------- ||
+// || ---------------------------------------------- ||
+
+// function toggleRecipe() {
+//     recipeContainer.classList.toggle("hidden")
+// }
 
 function hideRecipe() {
     recipeContainer.classList.add("hidden")
+}
+
+function showRecipe() {
+    recipeContainer.classList.remove("hidden")
+}
+
+function updateRecipeContainer(mealData) {
+    // meal title into HTML
+    const mealTitle = document.getElementById("meal-title")
+    mealTitle.innerHTML = mealData.strMeal
+
+    // meal thumbnail src and alt into HTML
+    const mealThumb = document.getElementById("meal-thumb")
+    mealThumb.src = mealData.strMealThumb
+    mealThumb.alt = mealData.strMeal
+
+    // meal instructions into HTML
+    const mealInstructions = document.getElementById("meal-instructions")
+    mealInstructions.innerText = mealData.strInstructions
+
+    //get ingredients and measures
+    const ingredients = []
+
+    for (let i = 1; i <= 20; i++) {
+        if (mealData["strIngredient" + i]) {
+            ingredients.push(`${mealData["strIngredient" + i]} - ${mealData["strMeasure" + i]} `)
+        } else {
+            break
+        }
+    }
+
+    ingredients.forEach((ingredient) => {
+        const ingredientsList = document.getElementById("ingredients-list")
+
+        let liElement = document.createElement("li")
+        liElement.classList.add("p-0")
+        ingredientsList.append(liElement)
+        liElement.innerText = ingredient
+    })
+
+    // meal web into HTML
+    const mealLink = document.getElementById("meal-source")
+    mealLink.href = mealData.strSource
+    mealLink.innerText = mealData.strSource
+
+    // meal YT video into HTML
+    const mealVideo = document.getElementById("meal-video")
+    mealVideo.href = mealData.strYoutube
 }
